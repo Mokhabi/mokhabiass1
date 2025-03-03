@@ -1,0 +1,74 @@
+/* Home Grid */
+.grid-pane {
+    -fx-padding: 20px;
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
+    -fx-alignment: center;
+}
+
+/* Title Label */
+.title-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10px;
+}
+
+/* Thumbnail images */
+.image-view {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 4, 0.5, 2, 2);
+}
+
+/* Hover Effect */
+.image-view:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+/* Full-size image view */
+.full-size-image {
+    -fx-border-color: #ddd;
+    -fx-border-width: 2px;
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}
+
+/* Button Box */
+.button-box {
+    -fx-padding: 20px;
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+}
+
+/* Buttons */
+.button {
+    -fx-font-size: 14px;
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Cancel Button */
+.cancel-button {
+    -fx-background-color: #f44336;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #e53935;
+}
+
+/* Home Button */
+.home-button {
+    -fx-background-color: #3b5998;
+}
+
+.home-button:hover {
+    -fx-background-color: #2d4373;
+}
