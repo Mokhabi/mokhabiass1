@@ -12,9 +12,9 @@ import javafx.scene.layout.*;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.io.File;
+import java.net.URL;
+import java.util.*;
 
 public class HelloApplication extends Application {
     private Stage primaryStage;
@@ -57,10 +57,14 @@ public class HelloApplication extends Application {
             thumbnail.getStyleClass().add("image-view");
 
             // Hover Effect
-            thumbnail.setOnMouseEntered(event -> thumbnail.setScaleX(1.1));
-            thumbnail.setOnMouseEntered(event -> thumbnail.setScaleY(1.1));
-            thumbnail.setOnMouseExited(event -> thumbnail.setScaleX(1));
-            thumbnail.setOnMouseExited(event -> thumbnail.setScaleY(1));
+            thumbnail.setOnMouseEntered(event -> {
+                thumbnail.setScaleX(1.1);
+                thumbnail.setScaleY(1.1);
+            });
+            thumbnail.setOnMouseExited(event -> {
+                thumbnail.setScaleX(1);
+                thumbnail.setScaleY(1);
+            });
 
             int index = i;
             thumbnail.setOnMouseClicked(event -> {
@@ -148,23 +152,21 @@ public class HelloApplication extends Application {
     }
 
     private void loadImages() {
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image1.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image2.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image3.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image4.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image5.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image6.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image7.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image8.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image9.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image10.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image11.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image12.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image13.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image14.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image15.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image16.jpeg");
-        images.add("file:/C:/Users/emmy/IdeaProjects/Assignment1/src/main/resources/com/example/assignment1/images/image17.jpeg");
+        try {
+            URL url = getClass().getClassLoader().getResource("com/example/assignment1/images");
+            if (url != null) {
+                File dir = new File(url.toURI());
+                File[] files = dir.listFiles((dir1, name) -> name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png"));
+                if (files != null) {
+                    for (File file : files) {
+                        String path = file.toURI().toURL().toExternalForm();
+                        images.add(path);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadStyleSheet(Scene scene) {
